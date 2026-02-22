@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Image Search</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        input { padding: 10px; width: 300px; }
+        button { padding: 10px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        img { width: 100%; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h2>AI Image Search</h2>
+    <input id="query" placeholder="Search images..." />
+    <button onclick="search()">Search</button>
+    <div class="grid" id="results"></div>
+
+<script>
+function search() {
+    const query = document.getElementById("query").value;
+    fetch(`/search?query=${query}`)
+        .then(res => res.json())
+        .then(data => {
+            const div = document.getElementById("results");
+            div.innerHTML = "";
+            data.results.forEach(item => {
+                div.innerHTML += `
+                    <div>
+                        <img src="/images/${item.image}">
+                        <p>${item.explanation}</p>
+                    </div>
+                `;
+            });
+        });
+}
+</script>
+</body>
+</html>
