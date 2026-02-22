@@ -81,7 +81,7 @@ Open: http://127.0.0.1:8000
 Clone the Git Repository:
 
 git clone <repo_url>
-cd ai-image-search-casestudy
+cd Image-search-case-study
 
 Build image:
 
